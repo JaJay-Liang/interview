@@ -1,0 +1,40 @@
+# 开发环境默认的profile，其他环境需要指定启动参数，比如：java -jar caigou.jar --spring.profiles.active=prod
+spring:
+  application: # 注册在registry中的 名字
+    name: interview
+  datasource:
+    master:
+      url: jdbc:mysql://127.0.0.1:3306/?socketTimeout=60000&autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: root
+      type: com.mysql.jdbc.Driver
+#    dynamic:
+#      primary: master
+#      hikari:
+#        max-lifetime: 1765000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+#        max-pool-size: 150 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  configuration:
+    default-statement-timeout: 5 #驱动等待数据库响应的秒数
+
+server:
+  port: 58021
+  servlet:
+    context-path: /interview/ #统一为访问的url加上一个前缀，方便nginx路由，
+  compression:
+    enabled: true
+    mime-types:
+      - text/html
+      - text/plain
+      - text/css
+      - application/json
+      - application/javascript
+  tomcat:
+    mbeanregistry:
+      enabled: true
+
+---
+
