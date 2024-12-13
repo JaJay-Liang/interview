@@ -3,4 +3,15 @@
 <mapper namespace="com.oscar.dao.InterviewDAO">
 
 
+    <select id="list" resultType="com.oscar.web.controller.out.ListOutModel">
+        select *
+        from db_oscar_practice.interview_test
+        <where>
+            id in
+            <foreach collection="inModel.ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+        order by id desc
+    </select>
 </mapper>
