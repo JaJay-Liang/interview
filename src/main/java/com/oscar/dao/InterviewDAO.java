@@ -21,7 +21,8 @@ public interface InterviewDAO extends BaseMapper<InterviewTest> {
 
     List<ListOutModel> list(@Param("inModel") ListInModel inModel);
 
-    @Select("SELECT id FROM db_oscar_practice.interview_test ")
-    List<Integer> selectId();
+    List<Integer> selectId(@Param("searchKey") String searchKey);
+
+    int batchUpdateClick(@Param("checkIds") List<Integer> checkIds);
 
 }

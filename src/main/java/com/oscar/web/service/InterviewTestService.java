@@ -57,9 +57,12 @@ public class InterviewTestService {
     }
 
     public List<ListOutModel> list(ListInModel inModel) {
-
-        List<Integer> ids = interviewDAO.selectId();
-        Integer num = 3;
+        String searchKey = inModel.getSearchKey();
+        List<Integer> ids = interviewDAO.selectId(searchKey);
+        Integer num = inModel.getPagesize();
+        if (num > ids.size()){
+            num = ids.size();
+        }
         Integer[] arr = new Integer[num];
 
         //生成指定范围  ids.size 内10个不重复的随机数
@@ -90,6 +93,11 @@ public class InterviewTestService {
         }
         inModel.setIds(checkIds);
         List<ListOutModel> out = interviewDAO.list(inModel);
+
+        //对这些已选过的checkId进行记录点击，后续筛选优先选未被点击过的
+        interviewDAO.batchUpdateClick(checkIds);
+
+
         return out;
     }
 }

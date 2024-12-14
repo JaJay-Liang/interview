@@ -10,4 +10,7 @@ public class ListInModel {
 
     private List<Integer> ids;
 
+    private Integer pagesize = 10;
+
+    private String searchKey;
 }
