@@ -17,8 +17,10 @@ jobs:
       - name: PR Agent action step
         uses: Codium-ai/pr-agent@main
         env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          config.model: "gemini/gemini-2.5-pro"
+          config.fallback_models: '["gemini/gemini-2.5-flash"]'
           github_action_config.auto_review: "true"
           github_action_config.auto_describe: "true"
           github_action_config.auto_improve: "false"
